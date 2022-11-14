@@ -1,0 +1,15 @@
+
+def main():
+    resposta = input('Escreva uma palavra: ')
+    letras = []
+    RESPOSTA = resposta.upper()
+    for i in RESPOSTA:
+        if i in letras:
+            print(f'{resposta} tem letras repetidas!')
+            exit()
+        else:
+            letras.append(i)
+    print(f'{resposta} não tem letras repetidas.')
+
+if __name__ == '__main__':
+    main()
