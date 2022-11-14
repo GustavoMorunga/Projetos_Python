@@ -1,0 +1,69 @@
+import math
+
+# Função que retorna se um número é primo ou não.
+def primo(n):
+    divisores = []
+    for i in range(2, round(math.sqrt(n)) + 1):
+        if n % i == 0:
+            divisores.append(i)
+    if divisores == [] and n > 1:
+        return True
+    else:
+        return False
+
+# Função que retorna uma mensagem de erro e pede para refazer o teste.
+def msg_erro():
+    print('Você não escolheu um número válido. Tente novamente.')
+    n = input('Escola um número natural: ')
+    return n
+
+# Função que verifica os possíveis erros no número escolhido.
+def possiveis_erros(resp):
+    controle = 0
+    erros = 'numero'
+    while controle == 0:
+        # Verifica se a resposta é um número.
+        while erros == 'numero':
+            try:
+                resp = float(resp)
+                erros = 'inteiro'
+            except:
+                resp = msg_erro()
+
+        # Verifica se o número é inteiro.
+        while erros == 'inteiro':
+            if resp % 1 != 0:
+                erros = 'numero'
+                resp = msg_erro()
+            else:
+                resp = int(resp)
+                erros = 'natural'
+
+        # Verifica se o número inteiro é natural.
+        while erros == 'natural':
+            if resp < 1:
+                erros = 'numero'
+                resp = msg_erro()
+            else:
+                erros = 'ok'
+                controle = 1
+                return resp
+
+# Função que retorna a lista de primos até um número natural escolhido.
+def lista_primos():
+    n = input('Escola um número natural: ')
+    n = possiveis_erros(n)
+
+    # Monta a lista de números primos.
+    primos = []
+    for i in range(n+1):
+        if primo(i) == True:
+            primos.append(i)
+    print(f'Lista de primos até {n}: {primos}')
+
+
+if __name__ == '__main__':
+    lista_primos()
+
+
+
